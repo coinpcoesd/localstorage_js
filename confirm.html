@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Dados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .data-item {
+            margin-bottom: 10px;
+        }
+        .data-item span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Confirmação de Dados</h1>
+        </div>
+        <div id="data">
+            <!-- Dados do formulário serão inseridos aqui -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const json = localStorage.getItem('form');
+            if (json) {
+                const obj = JSON.parse(json);
+
+                for (const key in obj) {
+                    const markup = `
+                    <div class="data-item"> 
+                        <span>${key}:</span> ${obj[key]}
+                    </div>
+                    `;
+                    document.getElementById('data').innerHTML += markup; 
+                }
+            } else {
+                document.getElementById('data').innerHTML = '<p>Nenhum dado encontrado.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
